@@ -1,0 +1,292 @@
+---
+title: "Multiple Linear Regression"
+output: pdf_document
+header-includes:
+   - \usepackage{amsmath}
+---
+\newcommand{\hatbeta}{\hat{\boldsymbol{\beta}}}
+
+The formulas are primarily derived from _Linear Regression Analysis, Fifth Edition_ by Montgomery et al. and/or the materials from the STAT 6021 course taught by Dr. Woo at the University of Virginia.  Except where specially cited, it is believed that the materials are well-known equations and concepts in the public domain.  If you believe otherwise, please reach out to me through my Github account so that I can correct the material.
+
+# The model
+
+## Observations and features
+
+Suppose we wish to model a variable of interest $y$ as a function of $k$-many features ($x_1, x_2, ..., x_k$).  
+
+When we want to speak of a single observation and its outcome, we will use
+$$
+\textbf x = \begin{bmatrix}
+ x_1 \\ x_2 \\ \vdots \\ x_k
+\end{bmatrix}
+$$
+where $\textbf x$ represents a single observation of the $k$ features and $y$ is the measured outcome.  We call the elements of $\textbf x_i$ the regressor variables.  We call the $y$ the response.
+
+In general, we assume that there are $n$-many observations and $n$ associated responses, resulting in the following matrices:
+$$
+\textbf X = \begin{bmatrix}
+    1 && x_{11}       & x_{12} & x_{13} & \dots & x_{1k} \\
+    1 && x_{21}       & x_{22} & x_{23} & \dots & x_{2k} \\
+    \vdots && \vdots       & \vdots & \vdots &       & \vdots \\
+    1 && x_{n1}       & x_{n2} & x_{n3} & \dots & x_{nk}
+\end{bmatrix}
+$$
+$$
+\textbf y = \begin{bmatrix}
+ y_1 \\ y_2 \\ \vdots \\ y_n
+\end{bmatrix}
+$$
+Note that we add a constant column to the observation matrix.  This simplifies our later formulas.
+
+
+## The linear model
+
+In multiple linear regression, we model the response in terms of the regressor variables:
+
+$$y = \textbf x' \boldsymbol\beta +  e$$
+
+where 
+$$
+\boldsymbol \beta ^T = \begin{bmatrix}
+ \beta_1 && \beta_2 && \dots && \beta_k
+\end{bmatrix}
+$$
+are the regression coefficients that define the model and $e$ is an error term.  The error term is not always explicitly written.  Note that error can result from various causes, such as model inadequacy, inaccurate measurements, and random variation in the $y$ values.
+
+In practice, we shall have to use estimators for the $\boldsymbol\beta$ model parameter, calculated from a set of observations.  In this case, we will resort to the usual $\hat{\boldsymbol \beta}$ notation for the vector of estimators or $\hat\beta_i$ for individual estimators.  These estimators are called the least-squares estimators.
+
+
+## Model assumptions
+As in simple linear regression, we make the following assumptions:
+
+* We assume the $e_i$ to be normally distributed
+* We assume that $\text{Var}(e) = \sigma^2$ for some fixed value of $\sigma$ 
+* We assume $E(e) = 0$.  
+* We assume that observations on the regressors $\textbf x_{i} = \begin{bmatrix} x_1 && x_2 && \dots && x_k \end{bmatrix}$ are independent and not dependent on the regression coefficients $\boldsymbol \beta$ or $\sigma$.
+* We assume, of course, that the data can be modeled by a linear relationship.
+
+
+
+
+# Basic formulas
+
+## The model parameters
+
+The $\hat\beta_i$ can be calculated as follows:
+$$
+  \hatbeta = (\textbf X'\textbf X)^{-1}\textbf X' \textbf y
+$$
+where $\textbf A'$ is our notation for the matrix transpose of $\textbf A$.
+
+## Fitted values and residuals
+
+We also define a useful "hat matrix" $\textbf H$:
+$$
+  \textbf H = \textbf X(\textbf X' \textbf X) \textbf X'
+$$
+The fitted values $\hat{\textbf{ y }}$ can be calculated from the observed responses $\textbf y$ using
+$$
+  \hat{\textbf{ y }} = \textbf H \textbf y 
+$$
+
+We define the residuals as the difference between the observed values and our fitted values:
+$$
+\textbf e = \textbf y - \hat{\textbf{ y }}
+$$
+Note that the $e_i, ..., e_n$ give the residual for each individual observation.  You can also use the hat matrix:
+$$
+\textbf e = (\textbf I - \textbf H){\textbf{ y }}
+$$
+
+## Utility Matrices
+
+We define the adjusted model matrix (the book calls it the `"centered" model matrix`):
+
+$$
+  \textbf X_c = \begin{bmatrix}
+    x_{11} - \bar x_1 && x_{12} - \bar x_2 &&  \dots && x_{1k} - \bar x_k \\
+    \vdots && \vdots && && \vdots \\
+    x_{n1} - \bar x_1 && x_{n2} - \bar x_2 &&  \dots && x_{nk} - \bar x_k
+  \end{bmatrix}
+$$
+
+As a notational convenience (borrowed from the book) let $\textbf C$ be defined as follows:
+$$
+\textbf C = (\textbf X' \textbf X)^{-1}
+$$
+This is the scaled covariance matrix.  In fact, per page 80 of the book,
+$$
+\sigma^2 \textbf C = \text{Var}(\hatbeta)
+$$
+
+# Sums of squares, variances, and expected values
+
+## Sums of squares
+The sums of squares have matric forms.
+
+The residual sum of squares:
+$$
+  SS_{Res} = \textbf y' \textbf y - \hatbeta' \textbf X'\textbf y
+$$
+The regression sum of squares:
+$$
+  SS_{R} = \hatbeta ' \textbf X' \textbf y - \frac{\left(\displaystyle \sum_{i=1}^n y_i\right)^2}{n}
+$$
+
+The total sum of squares:
+$$
+  SS_{T} = \textbf y' \textbf y - \frac{\left(\displaystyle \sum_{i=1}^n y_i\right)^2}{n}
+$$
+Note that the $SS_T$ can also be calculated with the formula used in simple linear regression (see p. 86 of the textbook).
+
+## Mean squared error
+The residual mean squared error is
+$$
+  MS_{Res} = \frac{SS_{Res}}{n - p}
+$$
+where $p = k + 1$.  Recall that $k$ is the number of features.  This is an unbiased estimator, according to the book.
+
+Also:
+$$
+  MS_{R} = SS_R / k
+$$
+
+## Error variance and expected value
+
+We have the following:
+$$E(e) = 0$$
+$$\hat \sigma^2 = MS_{Res} = \frac{SS_{Res}}{n-p}$$ 
+where $p = k + 1$ is one more than the number of features.  Note that this is not the same estimate as the maximum-likelihood estimate.  See p. 83 of the textbook for details.
+
+## The regression coefficients
+
+The least squares estimators (for the regression coefficients) are unbiased estimators:
+$$
+E(\hatbeta) = \boldsymbol \beta
+$$
+We also have (p. 80):
+$$
+\text{Var}(\hat\beta_j) = \sigma^2 C_{jj}
+$$
+where C is the utility matrix previously discussed.  Hence, $\text{se}(\hat\beta_j) = \sigma \sqrt{C_{jj}}$.
+
+# R squared
+The $R^2$ is
+$$
+  R^2 = 1 - \frac{SS_{Res}}{SS_T} = \frac{SS_{R}}{SS_T}
+$$
+
+The adjusted $R^2$ is 
+$$
+  R^2_{adj} = 1 - \frac{SS_{Res} / (n-p)}{SS_T / (n-1)} = 1 - \frac{MS_{Res}}{MS_T}
+$$
+where $MS_T = SS_T/(n-1)$.
+
+Note: Recall that $p = k + 1$.
+
+# Test statistics and distributions
+
+## F test to see if any coefficient is nonzero
+
+Given the null hypothesis $H_0: \beta_1 = \beta_2 = ... = \beta_k = 0$ and alternative hypothesis $H_a: \text{one of the}\; \beta_j\; \text{is nonzero}$, the F test statistic is
+
+$$
+  F_0 = \frac{MS_R}{MS_{Res}}
+$$
+When the null hypothesis is true, $F_0$ follows an $F_{k,n-p}$ distribution.  When it is not true, another distribution holds.  In both cases, if $F_0 > F_{\alpha,k,n-k-1}$, we can reject the null hypothesis (for our level of significant $\alpha$).
+
+For details, including an ANOVA table, see p. 85 from our textbook.
+
+## F test for subsets of regressors
+
+Read the book starting at p. 89.  Seriously, there's a lot of detail that we skip over here.
+
+Let
+$$ 
+ \boldsymbol\beta_1, \boldsymbol\beta_1
+$$
+be subsets of the regression coefficients such that
+$$
+  \boldsymbol\beta = \left[ \frac{\boldsymbol\beta_1}{\boldsymbol\beta_2} \right]
+$$
+Consider the null hypothesis $H_0: \boldsymbol\beta_2 = \textbf 0$ and the alternative hypothesis $H_a: \boldsymbol\beta_2 \ne \textbf 0$, where $textbf 0$ is a vector of all zeroes of an appropriate size.
+
+Then 
+$$
+\begin{array}{rcl}
+  \hatbeta_1 &=& (\textbf X_1' \textbf X_1)^{-1} \textbf X_1' \textbf y \\
+  SS_{R}(\boldsymbol\beta_1) &=& \hatbeta_1'\textbf X'_1\textbf y \\
+  SS_R(\boldsymbol\beta_2|\boldsymbol\beta_1) &=& SS_R(\boldsymbol\beta) - SS_R(\boldsymbol\beta_1)
+\end{array}
+$$
+where $\textbf X_1$ is the subset of the $\textbf X$ matrix with only the features included in $\boldsymbol \beta_1$.
+
+Then the F statistic (of doom!) is
+$$
+  F_0 = \frac{SS_R(\boldsymbol\beta_2|\boldsymbol\beta_1)/r}{MS_{Res}}
+$$
+where $r$ is the number of regression coefficients in $\boldsymbol\beta_2$.
+
+We won't go into which distributions hold (see p. 90), but we can test the F statistic as if the statistic follows a $F_{r,n-p}$ distribution.  If your level of significance is $\alpha$, check for $F_0 > F_{\alpha,r,n-p}$ and if so, reject the null hypothesis.
+
+Please read the book for some serious caveats to this method.  The method can be expanded, and we leave the discussion of this to the book.
+
+
+## T tests for individual regression coefficients
+
+Given the null hypothesis $H_0: \beta_j = 0$ and the alternative hypothesis $H_a: \beta_j \ne 0$, we can use the following t statistic:
+$$
+  t_0 = \frac{\hat\beta_j}{\sqrt{\hat\sigma^2 C_{jj}}} = \frac{\hat\beta_j}{\text{se}(\hat\beta_j)}
+$$
+where $C_{jj}$ is the element in the scaled correlation matrix.  If the null hypothesis is true, then the statistic follows the $t_{n-k-1}$ distribution.
+
+
+
+## Additional tests
+
+There are several more tests.  We leave the discussion of these to the book.
+
+
+# Confidence intervals
+
+## Basic formula
+
+For $\beta_j$:
+
+$$
+  \hat\beta_j - t_{A/2,n-p}\sqrt{\hat\sigma^2C_{jj}} \le \beta_j \le \hat\beta_j + t_{A/2,n-p}\sqrt{\hat\sigma^2C_{jj}}
+$$
+or, if you want to estimate the standard error differently, the more general formula:
+$$
+  \hat\beta_j - t_{A/2,n-p}\text{se}(\hat\beta_j) \le \beta_j \le \hat\beta_j + t_{A/2,n-p}\text{se}(\hat\beta_j)
+$$
+
+For the mean response ($E(y|\textbf x_0)$):
+
+$$
+  \hat y_0 - t_{\alpha/2,n-p}\sqrt{\hat\sigma^2\textbf x_0' (\textbf X'\textbf X)^{-1}\textbf x_0} \le E(y|\textbf x_0) \le
+  \hat y_0 + t_{\alpha/2,n-p}\sqrt{\hat\sigma^2\textbf x_0' (\textbf X'\textbf X)^{-1}\textbf x_0}
+$$
+
+## Joint confidence regions for regression coefficients
+
+### Confidence regision
+
+See p. 101 of the book.  We can use an approximate F statistic to build a region of confidence.
+
+### Scaled intervals
+We can set up a series of confidence intervals over all $\hat\beta_j$ simultaneously, so that we're $(1-a)$ confident that the full set of intervals contains the values of their respective parameters  One way of doing this is to pick a coefficient $\Delta$ to the standard error that sizes them with this goal:
+$$
+  \hat\beta_j \pm \Delta \; \text{se}(\hat\beta_j), \;\;\;j = 0 ... k
+$$
+
+The book discusses three ways to do this.  See p. 102.
+
+| Method          | $\Delta$ |
+| ----------------| -------- |
+| Bonferroni confidence intervals | Let $\Delta = t_{\alpha/(2p),n-p}$
+| the Scheffé method | see the book |
+| the maximum modulus t procedure | see the book |
+
+
+

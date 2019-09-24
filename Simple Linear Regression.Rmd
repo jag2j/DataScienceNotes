@@ -13,6 +13,8 @@ $$ y = \beta_1 x + \beta_0 + e$$
 
 with parameters $\beta_0$ and $\beta_1$ and an error term $e$.  We assume assume $e$ to be normally distributed and that $\text{Var}(e) = \sigma^2$ for some fixed value of $\sigma$ and $E(e) = 0$.  
 
+We call the $x$ the regressor (or predictor) variable and the $y$ the response variable.
+
 In practice, we will use the method of least squares to derive estimators $\hat\beta_1$ and $\hat\beta_0$.
 
 
