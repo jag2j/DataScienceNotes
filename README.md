@@ -2,9 +2,9 @@
 
 ## Available materials
 
-### Simple Linear Regression
-* A PDF document with notes: [Simple-Linear-Regression.pdf](https://github.com/jag2j/DataScienceNotes/blob/master/Simple-Linear-Regression.pdf)
-* The original R notebook source: [Simple Linear Regression.Rmd](https://github.com/jag2j/DataScienceNotes/blob/master/Simple%20Linear%20Regression.Rmd).
+* [Simple Linear Regression](https://github.com/jag2j/DataScienceNotes/blob/master/Simple-Linear-Regression.pdf)
+* [Multiple Linear Regression](https://github.com/jag2j/DataScienceNotes/blob/master/Multiple-Linear-Regression.pdf)
+* [Multicollinearity](https://github.com/jag2j/DataScienceNotes/blob/master/Multicollinearity.pdf)
 
 
 ## Contributing
