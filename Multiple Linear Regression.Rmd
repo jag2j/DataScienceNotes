@@ -137,7 +137,7 @@ The total sum of squares:
 $$
   SS_{T} = \textbf y' \textbf y - \frac{\left(\displaystyle \sum_{i=1}^n y_i\right)^2}{n}
 $$
-Note that the $SS_T$ can also be calculated with the formula used in simple linear regression (see p. 86 of the textbook).
+Note that the $SS_T$ can also be calculated with the formula used in simple linear regression (see p. 26 of the textbook).
 
 ## Mean squared error
 The residual mean squared error is
@@ -186,7 +186,7 @@ Note: Recall that $p = k + 1$.
 
 # Test statistics and distributions
 
-## F test to see if any coefficient is nonzero
+## The overall F test
 
 Given the null hypothesis $H_0: \beta_1 = \beta_2 = ... = \beta_k = 0$ and alternative hypothesis $H_a: \text{one of the}\; \beta_j\; \text{is nonzero}$, the F test statistic is
 
@@ -197,9 +197,9 @@ When the null hypothesis is true, $F_0$ follows an $F_{k,n-p}$ distribution.  Wh
 
 For details, including an ANOVA table, see p. 85 from our textbook.
 
-## F test for subsets of regressors
+## The partial F test
 
-Read the book starting at p. 89.  Seriously, there's a lot of detail that we skip over here.
+Read the book starting at p. 89.  Seriously, there's a lot of detail that we skip over here.  This is the basic method for checking significance when attempting to reduce a model (that is, reduce the number of regressors).
 
 Let
 $$ 
@@ -227,12 +227,12 @@ $$
 $$
 where $r$ is the number of regression coefficients in $\boldsymbol\beta_2$.
 
-We won't go into which distributions hold (see p. 90), but we can test the F statistic as if the statistic follows a $F_{r,n-p}$ distribution.  If your level of significance is $\alpha$, check for $F_0 > F_{\alpha,r,n-p}$ and if so, reject the null hypothesis.
+We won't go into which distributions hold (see p. 90), but we can test the F statistic as if the statistic follows an $F_{r,n-p}$ distribution.  If your level of significance is $\alpha$, check for $F_0 > F_{\alpha,r,n-p}$ and if so, reject the null hypothesis.
 
 Please read the book for some serious caveats to this method.  The method can be expanded, and we leave the discussion of this to the book.
 
 
-## T tests for individual regression coefficients
+## T tests for individual coefficient
 
 Given the null hypothesis $H_0: \beta_j = 0$ and the alternative hypothesis $H_a: \beta_j \ne 0$, we can use the following t statistic:
 $$
@@ -270,7 +270,7 @@ $$
 
 ## Joint confidence regions for regression coefficients
 
-### Confidence regision
+### Confidence region
 
 See p. 101 of the book.  We can use an approximate F statistic to build a region of confidence.
 
@@ -288,5 +288,62 @@ The book discusses three ways to do this.  See p. 102.
 | the Scheffé method | see the book |
 | the maximum modulus t procedure | see the book |
 
+*About the alpha values*: Note that we use the book's notation, rather than Dr. Woo's.  
 
+# Standardized regression coefficients
 
+See p. 113-115 of the textbook.  The main purpose of scaling is to produce "dimensionless regression coefficients" (as the textbook states it).  The units of the $\beta_j$ are normally based on the units of the data, but by scaling (and centering) the data, we can normalize the values of the $\beta_j$.  Note that we do not need the coefficient term anymore.  See the book for details, if I haven't mentioned that you should look at the book yet.
+
+## Unit normal scaling
+
+The following is effectively quoted from p.113-114 of the textbook.  In this approach, we perform the following:
+
+Let 
+$$ z_{ij} = \frac{x_{ij} - \bar x_j}{s_j}\;\;j = 1,2,\dots,k $$
+Let 
+$$y_i^{*} = \frac{y_i - \bar y}{s_y}\;\;i = 1,2,...,n$$
+where
+$$ s_j^2 = \frac{\displaystyle\sum_{i=1}^n(x_{ij} - \bar x)^2)}{n-1}$$
+and
+$$ s_y^2 = \frac{\displaystyle\sum_{i=1}^n(y_{i} - \bar y)^2)}{n-1}$$
+are the sample variances of the $x_j, y$.
+
+We write the model as $y_i^{*} = b_1 z_{i1} + b_2 z_{i2} + \dots + b_k z_{ik} + \epsilon_i$ for $i=1,2,\dots,n$.  The book writes the formula for the regression coefficients as 
+$$\hat{\textbf{b}} = (\textbf{Z}'\textbf{Z})^{-1}\textbf{Z}'\textbf{y}^*$$
+
+## Unit length scaling
+This approach is effectively the same, except we use the sum of squares of differences from the means.  The following is quoted from p. 114 of the textbook:
+
+Let
+$$w_{ij} = \frac{x_{ij} - \bar x_j}{s_{jj}^2}, \qquad i = 1,2,\dots, n, \quad j=1,2,\dots,k$$
+
+and 
+$$ y^0_i = \frac{y_i - \bar y}{SS_T^{1/2}}, \qquad i = 1,2, \dots, n$$
+where each
+$$ S_{jj} = \sum_{i=1}^n (x_{ij} - \bar x_j)^2 $$
+are what the book calls the "corrected sum of squares for regressor $x_j$".  
+
+We then fit the model
+$$
+  y_i^0 = b_q w_{i1} + b_2 w_{i2} + \dots + b_k w_{ik} + \varepsilon_i, \quad i = 1,2,\dots,n
+$$
+The coefficients can be calculated as
+
+$$
+  \hat{\textbf{b}} = (\textbf W' \textbf W)^{-1} \textbf W' \textbf y^0
+$$
+where $\textbf W' \textbf W$ is the correlation matrix.  Effectively, $(\textbf W' \textbf W)_{ij} = r_{ij}$ is the correlation computed using the Pearson correlation method (the book doesn't identify the method).
+
+The book doesn't say this in this section, but recall that $SS_T = \sum(y - \bar y)$ (p. 26), so $SS_T$ is the $y$ analogue to the $s_{jj}$.
+
+## Relationship
+Both forms of scaling produce the same $\hat{\textbf{b}}$ coefficient estimates.  
+
+In fact, in terms of the matrices, there is only a scaling factor difference:
+$$\textbf{Z}\textbf{Z}' = (n-1) \textbf{W}'\textbf{W}$$
+
+The coefficients in the original model (before scaling) and the coefficients in the scaled model are also related by a scaling factor:
+
+$$ \hat \beta_j = \hat b_j (\frac {SS_T}{S_{jj}})^{1/2} \quad j = 1,2,\dots,k $$
+
+So in theory you could calcaulate the original model and then calculate the coefficients for the scaled model.
