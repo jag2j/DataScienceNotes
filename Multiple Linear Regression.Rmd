@@ -209,7 +209,7 @@ be subsets of the regression coefficients such that
 $$
   \boldsymbol\beta = \left[ \frac{\boldsymbol\beta_1}{\boldsymbol\beta_2} \right]
 $$
-Consider the null hypothesis $H_0: \boldsymbol\beta_2 = \textbf 0$ and the alternative hypothesis $H_a: \boldsymbol\beta_2 \ne \textbf 0$, where $textbf 0$ is a vector of all zeroes of an appropriate size.
+Consider the null hypothesis $H_0: \boldsymbol\beta_2 = \textbf 0$ and the alternative hypothesis $H_a: \boldsymbol\beta_2 \ne \textbf 0$, where $\textbf 0$ is a vector of all zeroes of the appropriate size.
 
 Then 
 $$
@@ -315,7 +315,7 @@ $$\hat{\textbf{b}} = (\textbf{Z}'\textbf{Z})^{-1}\textbf{Z}'\textbf{y}^*$$
 This approach is effectively the same, except we use the sum of squares of differences from the means.  The following is quoted from p. 114 of the textbook:
 
 Let
-$$w_{ij} = \frac{x_{ij} - \bar x_j}{s_{jj}^2}, \qquad i = 1,2,\dots, n, \quad j=1,2,\dots,k$$
+$$w_{ij} = \frac{x_{ij} - \bar x_j}{s_{jj}^{1/2}}, \qquad i = 1,2,\dots, n, \quad j=1,2,\dots,k$$
 
 and 
 $$ y^0_i = \frac{y_i - \bar y}{SS_T^{1/2}}, \qquad i = 1,2, \dots, n$$
