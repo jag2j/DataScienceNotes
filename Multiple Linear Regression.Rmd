@@ -240,6 +240,7 @@ $$
 $$
 where $C_{jj}$ is the element in the scaled correlation matrix.  If the null hypothesis is true, then the statistic follows the $t_{n-k-1}$ distribution.
 
+Note that the square of the t statistic is an F statistic for an appropriate partial F test.  See p. 93 of the textbook for details.
 
 
 ## Additional tests
@@ -254,7 +255,7 @@ There are several more tests.  We leave the discussion of these to the book.
 For $\beta_j$:
 
 $$
-  \hat\beta_j - t_{A/2,n-p}\sqrt{\hat\sigma^2C_{jj}} \le \beta_j \le \hat\beta_j + t_{A/2,n-p}\sqrt{\hat\sigma^2C_{jj}}
+  \hat\beta_j - t_{\alpha/2,n-p}\sqrt{\hat\sigma^2C_{jj}} \le \beta_j \le \hat\beta_j + t_{\alpha/2,n-p}\sqrt{\hat\sigma^2C_{jj}}
 $$
 or, if you want to estimate the standard error differently, the more general formula:
 $$
