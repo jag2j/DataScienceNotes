@@ -5,7 +5,7 @@
 * [Simple Linear Regression](https://github.com/jag2j/DataScienceNotes/blob/master/Simple-Linear-Regression.pdf)
 * [Multiple Linear Regression](https://github.com/jag2j/DataScienceNotes/blob/master/Multiple-Linear-Regression.pdf)
 * [Multicollinearity](https://github.com/jag2j/DataScienceNotes/blob/master/Multicollinearity.pdf)
-
+* [Model Building and Validation](https://github.com/jag2j/DataScienceNotes/blob/master/Model-building-and-validation.pdf)
 
 ## Contributing
 
