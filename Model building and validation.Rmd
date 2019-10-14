@@ -22,20 +22,31 @@ Translation: You will need to read the textbook or other texts to study the spec
 
 # Purposes of regression
 
-The choice of model will also depend on the intended purpose(s) of the model.  The book notes a few (see p. 337):
+The choice of model will also depend on the intended purpose(s) of the model.  The book notes a few (see p. 337).  (JG: If I understand the book correctly, they are as follows).
 
 * elucidating the data
 * prediction
 * estimating parameters of the population
-* control
+* determining how to get a desired response
 
 
-# Comparing models
+# Comparing models for building
+
+## Summary
+
+| Comparison measure | Brief description |
+| ------------------- | ---------------- |
+| Coefficient of multiple determination ($R^2_p$) | You don't want the highest value necessarily, but you want a higher value.  However, you may wish to consider using the adjusted version instead.
+| Adjusted $R^2$ | Higher values are better.  The adjustment helps by penalizing adding regressors that don't significantly improve the model.
+| Residual mean square | See below.
+| Mallow's $C_p$ statistic | This estimates the total standardized mean square error.  You want this low.
+| Aikike Information Criterion (AIC) | maximing entropy of the model
+| BIC | These are variations on AIC
 
 ## Coefficient of multiple determination
 
 The value is
-$$ R_p^2 = \frac{SS_R(p)}{SS_T} = 1 - \frac{SS_Res(p)}{SS_T} $$
+$$ R_p^2 = \frac{SS_R(p)}{SS_T} = 1 - \frac{SS_{Res}(p)}{SS_T} $$
 
 where $SS_R(p)$ is the regression sum of squares for the $p$-many coefficients ($p-1$ included regressors and the intercept), and $SS_{Res}$ is the residual sum of squares for the same.
 
@@ -139,7 +150,73 @@ where $e_{(i)} = y_i - \hat y_{(i)}$ and $y_{(i)}$ is the value of the $i$ predi
 
 You could potentially look for models where this is small.  However, it's not really as simple as that.
 
-# Point estimators
+# Validating a selected model
+
+## Types of performance to validate
+
+The following are worth evaluating:
+
+* Effective prediction of values ranges inside and outside values used during build
+* Effective prediction of new scenarios outside original data set specification
+* Stability of coefficients across different kinds of fittings
+* Reasonable signs (positive versus negative) and magnitudes of coefficients with known meanings
+* Avoidance of multicollinearity
+
+It's best to test as many as possible because you don't always know how a model will be used.
+
+## Techniques
+
+The textbook notes three validation techniques:
+
+* Evaluating the model using analytical methods, background knowledge, and theory.
+* Evaluating the prediction on new data
+* Subsetting in which you train it on a subset of your data and validate it on the remaining data.
+
+(JG: Note that the book doesn't prefer the term "cross-validation", but I do.)
+
+## Using data splitting
+
+You can divide your data up and fit the model with one subset and validate it on the other.  The book calls this "data splitting" and calls the two sets of data the "estimation data" (used to fit the model) and the "prediction data" (used to evaluate the effectiveness on new data).
+
+### Using the PRESS statistic
+
+The book recommends using the PRESS statistic on the prediction set to calculate a "prediction" $R^2$:
+
+$$ R^2_{Prediction} = 1 - \frac{PRESS}{SS_T}. $$
+
+An absolute value close to 1 is good.
+
+### Choosing how to form subsets
+
+Some methods include
+
+* Breaking the data based on time sequence (earlier versus later)
+* Breaking the data up arbitrarily (although you may not necessarily pick the best division possible)
+* Using the DUPLEX algorithm (see below)
+
+The DUPLEX algorithm consists of transforming the data so that predictors are orthonormalized and that the data forms a rough sphere and then picking off the pair of points furthest apart to be split into each subset.  The process of finding pairs is repeated until the subsets are fully formed.
+
+### Evaluating subsets
+
+However chosen, the subsets can be checked by looking at a value that (effectively) measures the relative volumes of the subsets, in terms of how data is spread out:
+
+$$
+\left(  \frac{|\textbf X'_E \textbf X_E |}{|\textbf X'_P\textbf X_P|} \right)^{1/p},
+$$
+where $|\textbf K|$ is the determinant and the matrices are the points in the estimation and prediction subsets.
+
+### Caveats
+
+* The book says that Snee recommends at least $2p + 25$ observations.
+* The book suggests eliminating near neighbors in the full data set.
+* The book notes that you can potentially refit using the full data set and compare it to the reduced subset fit.  You can potentially decrease standard errors this way.
+* The book discusses double-cross validation.
+
+# Data from planned experiments
+
+Designed experiments let you exercise some congtrol over the data collected.  Because of this, you can attempt to pick predictors in a way that avoid multicollinearity, attempt to collect data in case you need higher order terms, etc.
+
+# Errors of point estimators
 
 The material in this section is sourced from  _Mathematical Statistics with Applications, ed. 6_ by Wackerly et al.  See the book for additional information.
 
