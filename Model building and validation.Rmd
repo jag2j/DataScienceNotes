@@ -20,7 +20,7 @@ Translation: You will need to read the textbook or other texts to study the spec
 * Model adequacy concerns with whether the model and data meet the theoretical requirements, e.g., linearity assumption, constant variance assumption, etc.  
 * Model validation is about checking whether the model works well in practice, e.g., provides good predictions, works on new data not in the original estimation data set, etc.
 
-# Purposes of regressino
+# Purposes of regression
 
 The choice of model will also depend on the intended purpose(s) of the model.  The book notes a few (see p. 337):
 
