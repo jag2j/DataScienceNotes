@@ -20,7 +20,15 @@ Translation: You will need to read the textbook or other texts to study the spec
 * Model adequacy concerns with whether the model and data meet the theoretical requirements, e.g., linearity assumption, constant variance assumption, etc.  
 * Model validation is about checking whether the model works well in practice, e.g., provides good predictions, works on new data not in the original estimation data set, etc.
 
-# Methods for variable selection
+# Purposes of regressino
+
+The choice of model will also depend on the intended purpose(s) of the model.  The book notes a few (see p. 337):
+
+* elucidating the data
+* prediction
+* estimating parameters of the population
+* control
+
 
 # Comparing models
 
@@ -113,14 +121,27 @@ $$
 
 which for least squares is
 $$
-\text{BIC}_{Sch} = n \ln(\frac{SS_{Res}}{n}) + p \ln(n).
+\text{BIC}_{Sch} = n \ln\left(\frac{SS_{Res}}{n}\right) + p \ln(n).
 $$
 
 ### The Sawa BIC
 
 We don't define it here.
 
+## PRESS statistics
+
+Let 
+$$
+\text{PRESS}_p = \sum_{i=1}^n[y_i - \hat y_{(i)}]^2 = \sum_{i=1}^n \left(\frac{e_i}{1-h_{ii}}\right)^2,
+$$
+
+where $e_{(i)} = y_i - \hat y_{(i)}$ and $y_{(i)}$ is the value of the $i$ predicted response if you fit a model without that data point.  PRESS stands for "prediction error sum of squares" and is due to Allen.  See p. 151 of the textbook for these details and more.  
+
+You could potentially look for models where this is small.  However, it's not really as simple as that.
+
 # Point estimators
+
+The material in this section is sourced from  _Mathematical Statistics with Applications, ed. 6_ by Wackerly et al.  See the book for additional information.
 
 The bias of an estimate is
 $$ B(\hat\theta) = E(\hat\theta) - \theta$$
@@ -132,9 +153,7 @@ It can be shown that
 
 $$ \text{MSE}(\hat\theta) = \text{Var}(\hat\theta) + (B(\hat\theta))^2.$$
 
-See _Mathematical Statistics with Applications, ed. 6_ by Wackerly et al. for additional details.
-
-The text MSE is also used to represent the related concept of "mean square for error", discussed in the notebooks for single and multiple linear regression.  Mean squared errors of point estimators is concerned with the theoretical values (assuming a known population), while mean square for error is normally calculated from samples.
+(Caveat by JG: The text MSE is also used to represent the related concept of "mean square for error", discussed in the notebooks for single and multiple linear regression.  Mean squared errors of point estimators is concerned with the theoretical values (assuming a known population), while mean square for error is normally calculated from samples.)
 
 # Ancillary Material
 
