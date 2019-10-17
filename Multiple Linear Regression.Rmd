@@ -82,7 +82,7 @@ where $\textbf A'$ is our notation for the matrix transpose of $\textbf A$.
 
 We also define a useful "hat matrix" $\textbf H$:
 $$
-  \textbf H = \textbf X(\textbf X' \textbf X) \textbf X'
+  \textbf H = \textbf X(\textbf X' \textbf X)^{-1} \textbf X'
 $$
 The fitted values $\hat{\textbf{ y }}$ can be calculated from the observed responses $\textbf y$ using
 $$
