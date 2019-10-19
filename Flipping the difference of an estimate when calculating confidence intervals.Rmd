@@ -1,0 +1,49 @@
+---
+title: "Flipping a difference estimate in confidence intervals"
+output: html_notebook
+---
+
+Consider two estimators $\hat a, \hat b$.  For example, these might be the estimates of regression coefficients.
+
+Suppose you want a confidence interval for ($\hat a -\hat b$).  Then the interval will be of the form
+$$
+  \left((\hat a - \hat b) - \Delta \; \text{se}(\hat a -\hat b), \;\;(\hat a -\hat b) + \Delta \; \text{se}(\hat a -\hat b)\right)
+$$
+for $\Delta$ dependent on whether you are using an indvidual interval or one of the joint interval forms.
+
+What happen if you now want the interval for ($\hat b -\hat a$)?  Then the form is 
+
+$$
+\left((\hat b - \hat a) - \Delta \; \text{se}(\hat b -\hat a), \;\;(\hat b -\hat a) + \Delta \; \text{se}(\hat b -\hat a)\right)
+$$
+
+Though not immediately obvious, this is simply an inverted form of the first interval.  To prove this, we first observe that 
+
+$$\text{Var}(\hat b - \hat a) = \text{Var}((-1)(\hat a - \hat b)) = (-1)^2\text{Var}(\hat a - \hat b) = \text{Var}(\hat a - \hat b).$$
+
+Since the variances are equal, the standard errors are equal:
+$$
+  \text{se}(\hat b - \hat a) = \sqrt{\text{Var}(\hat b - \hat a)} = \sqrt{\text{Var}(\hat a - \hat b)} = \text{se}(\hat a - \hat b)
+$$
+
+Thus,
+
+\begin{array}{c}
+ \left((\hat b - \hat a) - \Delta \; \text{se}(\hat b -\hat a), \;\;(\hat b -\hat a) + \Delta \; \text{se}(\hat b -\hat a)\right) \\
+ 
+\left((\hat b - \hat a) - \Delta \; \text{se}(\hat a -\hat b), \;\;(\hat b -\hat a) + \Delta \; \text{se}(\hat a -\hat b)\right) \\
+
+ \left(-(\hat a - \hat b) - \Delta \; \text{se}(\hat a -\hat b), \;\;-(\hat a -\hat b) + \Delta \; \text{se}(\hat a -\hat b)\right) \\
+
+ \left(- \left[(\hat a - \hat b) + \Delta \; \text{se}(\hat a -\hat b)\right], \;\;- \left[(\hat a -\hat b) - \Delta \; \text{se}(\hat a -\hat b)\right]\right) \\
+
+ \left(- [\text{upper bound for } \hat a - \hat b], \;\;- [\text{lower bound for } \hat a - \hat b]\right).
+
+\end{array}
+
+
+In other words, in flipping our estimate of interest from $\hat a - \hat b$ to $\hat b - \hat a$, we have transformed our resulting interval from 
+$$
+  (x, y) \to (-y, -x)
+$$
+where $x, y$ are the appropriate values.
