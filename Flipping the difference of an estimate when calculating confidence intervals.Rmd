@@ -1,6 +1,6 @@
 ---
 title: "Flipping a difference estimate in confidence intervals"
-output: html_notebook
+output: pdf_document
 ---
 
 Consider two estimators $\hat a, \hat b$.  For example, these might be the estimates of regression coefficients.
@@ -27,20 +27,15 @@ $$
 $$
 
 Thus,
-
+$$
 \begin{array}{c}
  \left((\hat b - \hat a) - \Delta \; \text{se}(\hat b -\hat a), \;\;(\hat b -\hat a) + \Delta \; \text{se}(\hat b -\hat a)\right) \\
- 
-\left((\hat b - \hat a) - \Delta \; \text{se}(\hat a -\hat b), \;\;(\hat b -\hat a) + \Delta \; \text{se}(\hat a -\hat b)\right) \\
-
+ \left((\hat b - \hat a) - \Delta \; \text{se}(\hat a -\hat b), \;\;(\hat b -\hat a) + \Delta \; \text{se}(\hat a -\hat b)\right) \\
  \left(-(\hat a - \hat b) - \Delta \; \text{se}(\hat a -\hat b), \;\;-(\hat a -\hat b) + \Delta \; \text{se}(\hat a -\hat b)\right) \\
-
  \left(- \left[(\hat a - \hat b) + \Delta \; \text{se}(\hat a -\hat b)\right], \;\;- \left[(\hat a -\hat b) - \Delta \; \text{se}(\hat a -\hat b)\right]\right) \\
-
  \left(- [\text{upper bound for } \hat a - \hat b], \;\;- [\text{lower bound for } \hat a - \hat b]\right).
-
 \end{array}
-
+$$
 
 In other words, in flipping our estimate of interest from $\hat a - \hat b$ to $\hat b - \hat a$, we have transformed our resulting interval from 
 $$
