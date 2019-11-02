@@ -63,6 +63,10 @@ $$ y = \begin{dcases}
 0 & \text{with probability } 1-\pi_i
 \end{dcases} $$
 
+\fbox{ Note by JG }
+
+The response values effectively represent our model for the random outcome of a trial for the observation group $i$, tied to specific $x$ values for that observation.  An observation point $i$ in the data can in fact cover multiple trial data points, in which case we use the confusing notation $y_i$ to refer to sum of outcomes (1 or 0) over all the trials.  We use $n_i$ to refer to the number of trials for observation $i$.  Then $y$ is the random variable predicting the outcome of a trial, rather than a specific data point.
+
 Theoretically, the log-odds $\eta$ of $y_i$ are
 $$ \eta_i = \ln \frac{\pi_i}{1-\pi_i}, $$
 
