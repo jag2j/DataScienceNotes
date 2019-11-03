@@ -3,6 +3,7 @@ title: "Logistic Regression"
 output: pdf_document
 header-includes:
    - \usepackage{mathtools}
+urlcolor: blue
 ---
 \newcommand \bs{{\boldsymbol\beta}}
 
@@ -63,21 +64,28 @@ $$ y = \begin{dcases}
 0 & \text{with probability } 1-\pi_i
 \end{dcases} $$
 
-\fbox{ Note by JG }
+------------------          ------------------------------
+\fbox{ Note by JG }         The response values effectively represent our model for the random outcome of a trial for the observation group $i$, tied to specific $x$ values for that observation.  An observation point $i$ in the data can in fact cover multiple trial data points, in which case we use the confusing notation $y_i$ to refer to sum of outcomes (1 or 0) over all the trials.  We use $n_i$ to refer to the number of trials for observation $i$.  Then $y$ is the random variable predicting the outcome of a trial, rather than a specific data point.
 
-The response values effectively represent our model for the random outcome of a trial for the observation group $i$, tied to specific $x$ values for that observation.  An observation point $i$ in the data can in fact cover multiple trial data points, in which case we use the confusing notation $y_i$ to refer to sum of outcomes (1 or 0) over all the trials.  We use $n_i$ to refer to the number of trials for observation $i$.  Then $y$ is the random variable predicting the outcome of a trial, rather than a specific data point.
+------------------          ------------------------------
+
 
 Theoretically, the log-odds $\eta$ of $y_i$ are
 $$ \eta_i = \ln \frac{\pi_i}{1-\pi_i}, $$
 
 where $f(x) = x / (1-x)$ is known in general as the *logit* transform.
 
-To estimate the log-odds in terms of predictors, we estimate $\eta$ using a linear model :
+To estimate the log-odds in terms of actual predictors, we estimate $\eta$ for a given $\textbf x$ using a linear model:
 $$
 \hat\eta_x = \textbf x'\bs,
 $$
 
-which we can call the *linear predictor* (for the log-odds) given the specific predictor level.  Since we are interested in the odds calculated for specific levels of $\textbf x$ here, I have added a subscript. Outside of this section, I will sometimes drop the subscript for notational convenience.  The book uses $i$ as a subscript to indicate the result for the $\textbf x$ level derived from observation $i$.
+which we can call the *linear predictor* (for the log-odds) given the specific predictor level.  
+
+------------------                ------------------------------
+\fbox{ Notation of subscripts }   Since we are interested in the odds calculated for specific levels of $\textbf x$ here, I have added a subscript indicating the relationship to $\textbf x$. Outside of this section, I will sometimes drop the subscript for notational convenience.  The book uses $i$ as a subscript to indicate the result for the $\textbf x$ level derived from observation $i$.  I will also do this if we're specifically interested in an estimate tied to the $\textbf x_i$ for a particular observation.
+
+------------------                ------------------------------
 
 Since the logistic transform inverts the logit transform, we can recover $\pi_x$ using the logistic transform on the log-odds:
 $$ \hat\pi_x = \frac{1}{1+e^{\hat\eta_x}}. $$
@@ -98,7 +106,7 @@ $$ L(\bs | \textbf y) = \prod_{i=1}^n \pi^{y_i}(1-\pi_i)^{n_i-y_i}.$$
 
 In some places, the book assumes that $n_i = 1$ and in others it does not.
 
-We have borrowed some notation from the Wikipedia article _Likelihood function_ ((link)[https://en.wikipedia.org/w/index.php?title=Likelihood_function&oldid=923888811]) instead of using the book's somewhat more confusing notation.  
+We have borrowed some notation from the Wikipedia article _Likelihood function_ ([link](https://en.wikipedia.org/w/index.php?title=Likelihood_function&oldid=923888811)) instead of using the book's somewhat more confusing notation.  
 
 The log-likelihood is 
 $$
@@ -132,7 +140,7 @@ To quote the textbook:
 
 Consider a full model (FM) and a reduced model (RM).  Let $L(\text{model})$ mean the value of the likelihood function for a given model.  Then let
 
-$$ LR = 2 ln \frac{L(FM)}{L(RM)}. $$
+$$ LR = 2 \ln \frac{L(FM)}{L(RM)}. $$
 
 When the reduced model is correct, this follows a $\chi^2$ distribution with degrees of freedom equal to the difference in the number of parameters between models.  Therefore, we would reject the null hypothesis that _the reduced model is the better model_ if $\chi^2$ test exceeds our level of significance.
 
