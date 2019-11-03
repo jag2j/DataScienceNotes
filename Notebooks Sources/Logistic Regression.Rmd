@@ -87,11 +87,11 @@ which we can call the *linear predictor* (for the log-odds) given the specific p
 
 ------------------                ------------------------------
 
-Since the logistic transform inverts the logit transform, we can recover $\pi_x$ using the logistic transform on the log-odds:
-$$ \hat\pi_x = \frac{1}{1+e^{\hat\eta_x}}. $$
+Since the logistic transform inverts the logit transform, we can recover $\pi_x$ using the logistic transform on the odds, which we recover from the log-odds:
+$$ \hat\pi_x = \frac{e^{\hat\eta_x}}{1+e^{\hat\eta_x}} = \frac{1}{1+e^{-\hat\eta_x}}. $$
 
 We offer without proof that $\hat\pi_X$ estimates $E(\text{response}|\textbf x)$.  Supposing that result, we have successfully constructed a model for our response!  We can therefore express the expected response in terms of the predictor:
-$$ \hat y(\textbf x) = \hat\pi_x = \frac{1}{1 + e ^ {\textbf x'\bs}},$$
+$$ \hat y(\textbf x) = \hat\pi_x = \frac{1}{1 + e ^ {-\textbf x'\bs}},$$
 
 where $\hat y$ here is a fitted value that we use as our estimate of the average response for the given level of $\textbf x$.
 
