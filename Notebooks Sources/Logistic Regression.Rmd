@@ -32,8 +32,8 @@ This model does not work well for cases when the response varies between two val
 
 | observation ($i$)   | x levels ($X_i$) | response (y)          | trials   | no. trials ($n_i$) | result ($y_i$) |
 | ------------------- | ---------------- | -----------           | -------- | --------------     | --------------- |
-| 1                   | Carl flips coins | landing face (H = 1)  | H H T    | 3                  | 2    |
-| 2                   | Sam flips coins  | landing face (H = 1)  | T H      | 2                  | 1  |
+| 1                   | Carl flips coins | Heads = 1, Tails = 0  | H H T    | 3                  | 2    |
+| 2                   | Sam flips coins  | " " "                 | T H      | 2                  | 1  |
 
 
 ## Odds and sigmoid functions
@@ -169,19 +169,23 @@ $$ D = 2 \sum_{i=1}^n \left[ y_i\ln\frac{y_i}{n_i\pi_i} + (n_i-y_i)\ln\frac{n_i-
 
 For large enough samples and an adequate fit by the full model, the deviance follows a $\chi^2$ distribution with $n-p$ degrees of freedom, where $p$ is the number of coefficients in the model ($p = k + 1$ for $k$ many predictors).
 
+------------------          ------------------------------
+\fbox{ Note by JG }         The book indicates that the saturated model uses $\pi_i = y_i/n_i$.  Comparing this to the above formula, it works out. The saturated model is: $\ln L(\text{saturated}) = \sum_{i=1}^n y_i\ln\left(\frac{y_i}{n_i}\right) + \sum_{i=1}^n(n_i - y_i)\ln\left(1 - \frac{y_i}{n_i}\right).$
 
-\fbox{ Note by JG }   
-The book indicates that the saturated model uses $\pi_i = y_i/n_i$.  Comparing this to the above formula, it works out. The saturated model is:
-$$  \ln L(\text{saturated}) = \sum_{i=1}^n y_i\ln\left(\frac{y_i}{n_i}\right) + \sum_{i=1}^n(n_i - y_i)\ln\left(1 - \frac{y_i}{n_i}\right). $$
+------------------          ------------------------------
 
 ### Pearson chi-square
 There is also a Pearson chi-square goodness-of-fit statistic:
 
-$$ \chi^2 = \sum_{i=1}^n\frac{y_i-n_i\hat\pi_i}{n_i\hat\pi_i(1-\hat\pi_i)}. $$
-
-
+$$ \chi^2 = \sum_{i=1}^n\frac{(y_i-n_i\hat\pi_i)^2}{n_i\hat\pi_i(1-\hat\pi_i)}. $$
 
 This follows a $\chi^2$ distribution with $n-p$ degrees of freedom.  In addition to seeing if the value is large (according to its distribution), you can divide by $n-p$ and compare the value to unity to assess the goodness of fit.
+
+------------------          ------------------------------
+\fbox{ Note by JG }         I think the book has a typo.  I've squared the numerator to correct for this.
+
+------------------          ------------------------------
+
 
 ### Homer-Lemeshow test
 
