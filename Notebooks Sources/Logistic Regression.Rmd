@@ -165,7 +165,7 @@ The textbook defines the deviance as
 $$ D = 2 \ln \frac{L(\text{saturated model})}{L(\text{full model})}. $$
 
 In this case, the deviance is
-$$ D = 2 \sum_{i=1}^n \left[ y_i\ln\frac{y_i}{n_i\pi_i} + (n_i-y_i)\ln\frac{n_i-y_i}{n_i(1-\hat\pi_i)} \right]. $$
+$$ D = 2 \sum_{i=1}^n \left[ y_i\ln\frac{y_i}{n_i\hat\pi_i} + (n_i-y_i)\ln\frac{n_i-y_i}{n_i(1-\hat\pi_i)} \right]. $$
 
 For large enough samples and an adequate fit by the full model, the deviance follows a $\chi^2$ distribution with $n-p$ degrees of freedom, where $p$ is the number of coefficients in the model ($p = k + 1$ for $k$ many predictors).
 

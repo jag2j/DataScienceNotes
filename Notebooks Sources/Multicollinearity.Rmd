@@ -14,6 +14,15 @@ where $R_j^2$ is the coefficient of multiple determination (i.e., the non-adjust
  
 $$ x_j = \zeta_0 + \zeta_1 x_1 + \dots + \zeta_{j-1} x_{j-1} + \zeta_{j+1} x_{j+1} + \dots + \zeta_n x_n . $$  
 
+## Interpretation
+Here are some rules for interpreting VIFs:
+
+* The book notes that values higher than five may imply a problem: "practical experience indicates that if any of the VIF exceed 5 or 10, it is an indication that the associated regression coefficient are poorly etimated becaue of multicollinearity" (p. 296).
+* VIFs also affect the length of the confidence intervals for coefficients.  According to the book, the $j$ confidence interval will be longer by a factor of $\sqrt{\text{VIF}_j}$.
+
+
+## Example calculation
+
 For example:
 ```{r}
 library(faraway)
@@ -42,7 +51,7 @@ results = as.matrix(rbind(faraway_vifs, our_vifs))
 results
 ```
 
-## Alternative interpretation
+## Matrix calculation
 
 The values of $\text{VIF}_j$ is also the value of $C_{jj}$ when fitting the linear model.  This leads to an alternative formula:
 
