@@ -89,6 +89,9 @@ The book points out that where $MS_{Res}(p)$ is minimized, $R^2_{adj}$ will be m
 
 Consider the mean square error of a single fitted value:
 $$\text{MSE}(\hat y_i) = E[\hat y_i - E(y_i)]^2.$$
+
+Note that we use $E(y_i)$ here because $\hat y_i$ (in linear regresion) is attempting to estimate the mean y value for observation $i$, not a specific observed $y_i$.
+
 We can build on this (see p. 334) and define the standardized total mean squared error as
 $$
  \Gamma_p = \frac{1}{\sigma^2}\left\{\sum_{i=1}^n{[E(y_i)-E(\hat y_i)]^2 + \sum_{i=1}^n\text{Var}(\hat y_i)}\right\}.
