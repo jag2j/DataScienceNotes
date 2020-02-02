@@ -1,9 +1,18 @@
 ---
 title: "Multicollinearity"
 output: pdf_document
+urlcolor: blue
 ---
 
 The formulas are primarily derived from _Linear Regression Analysis, Fifth Edition_ by Montgomery et al. and/or the materials from the STAT 6021 course taught by Dr. Woo at the University of Virginia.  Except where specially cited, it is believed that the materials are well-known equations and concepts in the public domain.  If you believe otherwise, please reach out to me through my Github account so that I can correct the material.
+
+# Multicollinearity
+
+It should be noted that collinearity and multicollinearity are not exact synonyms.  James et al. offer good definitions of collinearity and multicollinearity in _An Introduction to Statistical Learning_ ([link](http://faculty.marshall.usc.edu/gareth-james/ISL/)):
+
+> "Collinearity refers to the situation in which two or more predictor variables are closely related to one another... A simple way to detect collinearity is to look at the correlation matrix of the predictors. An element of this matrix that is large in absolute value indicates a pair of highly correlated variables, and therefore a collinearity problem in the data. Unfortunately, not all collinearity problems can be detected by inspection of the correlation matrix: it is possible for collinearity to exist between three or more variables even if no pair of variables has a particularly high correlation. We call this situation multicollinearity." (pg. 99-101)
+
+The authors of that text suggest using the variance inflation factor as a measure: "Instead of inspecting the correlation matrix, a better way to assess multicollinearity is to compute the variance inflation factor" (ibid.).  The notes below are derived from Montgomery et al. regarding this subject.
 
 # Variance inflation factor
 
