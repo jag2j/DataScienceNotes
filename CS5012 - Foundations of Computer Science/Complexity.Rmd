@@ -1,0 +1,111 @@
+---
+title: "Complexity"
+output: pdf_document
+header-includes:
+   - \usepackage{mathtools}
+urlcolor: blue
+---
+
+The notes are primarily derived from _Introduction to Algorithms_, third edition, by Cormen et al.  Except where specially cited, it is believed that the materials are well-known formulas and concepts in the public domain.  If you believe otherwise, please reach out to me through my Github account so that I can correct the material.
+
+# Asymptotic Comparisons
+
+We denote several kinds of asymptoptic comparisons between functions:
+
+**$\Theta$-notation** describes a function bound on both sides by another function, possibly multiplied by constant coefficients on either side:
+$$\begin{aligned}
+\Theta(g(n)) = \{ f(n) : \text{there exist positive constants } c_1, c_2, \text{ and } n_0
+\text{ such that }\\ 0 \le c_1g(n) \le f(n) \le c_2 g(n) \text{ for all } n \ge n_0\}
+\end{aligned}$$
+
+**$O$-notation** bounds the order of growth above only. Per the book, "We use $O$-notation to give an upper bound on a function, within a constant factor".
+$$\begin{aligned}
+O(g(n)) = \{ f(n) : \text{there exist positive constants } c \text{ and } n_0
+\text{ such that }\\ 0 \le f(n) \le c g(n) \text{ for all } n \ge n_0\}
+\end{aligned}$$
+
+**$\Omega$-notation** bounds below:
+$$\begin{aligned}
+\Omega(g(n)) = \{ f(n) : \text{there exist positive constants } c \text{ and } n_0
+\text{ such that }\\ 0 \le c g(n) \le f(n) \text{ for all } n \ge n_0\}
+\end{aligned}$$
+
+**$o$-notation** bounds above in a different way than $O$-notation.  Please consult the book (p. 51) for details:
+$$\begin{aligned}
+o(g(n)) = \{ f(n) : \text{ for any } c > 0 \text{, there exists a constant } \\ n_0
+\text{ such that } 0 \le f(n) \le cg(n) \text{ for all } n \ge n_0\}
+\end{aligned}$$
+
+**$\omega$-notation** bounds below in a different way than $\Omega$-notation:
+$$\begin{aligned}
+\omega(g(n)) = \{ f(n) : \text{ for any } c > 0 \text{, there exists a constant } \\ n_0
+\text{ such that } 0 \le cg(n) \le f(n) \text{ for all } n \ge n_0\}
+\end{aligned}$$
+
+## Summary
+
+| Type of notation | Purpose           | Examples |
+| ---------------- | -------           | -------- |
+| $\Theta(g(n))$         | Two-sided bounds | $7n + n^2 \in \Theta(n^2)$
+| $O(g(n))$              | Upper bound       | $7n \in O(n^2)$, $7n \in O(n)$
+| $\Omega(g(n))$         | Lower bound       | $7n \in \Omega(n)$, $7n + n^2 \in \Omega(n^2)$
+| $o(g(n))$              | Non-tight upper bound | $2n^2 \notin o(n^2)$, $2n \in o(n^2)$
+| $\omega(g(n))$         | Non-tight lower bound | $n^2/2 \in \omega(n)$, $n^2/2 \notin \omega(n^2)$
+
+## Equality notation
+
+The various notations–$\Theta(g(n))$, $O(g(n))$, etc.–all refer to sets of functions.  However, the book notes a quirk of the notation: "We write $f(n) = O(g(n))$ to indicate that the function f(n) is a member of the set O(g(n))" (p. 47).  In other words, it is common to use expression of equivalence instead of the proper notation of membership.  It is left to reader to consider the reasons for this approach.
+
+## Properties
+
+The asymptotic comparisons have some properties in common with real numbers:
+
+* **Transitivity**.  The comparisons are transitive.  For example, $[ f(n) = O(g(n)) \text{ and } g(n) = O(h(n)) ] \implies f(n) = O(h(n))$.  This holds for each of the types of bounds.
+* **Reflexivity**.  The following comparisons are reflexive: $\Theta(\dots)$, $O(\dots)$, and $\Omega(\dots)$.  For example, $f(n) = \Theta(f(n))$.
+* **Symmetry**.  $\Theta(\dots)$ is symmetric: $f(n) = \Theta(g(n)) \iff g(n) = \Theta(f(n))$ 
+* **Transpose symmetry**.  We have that $f(n) = O(g(n)) \iff g(n) = \Omega(f(n))$ and $f(n) = o(g(n)) \iff g(n) = \omega(f(n))$.
+
+The book notes that not all pairs of functions can be compared asymptotically: "... it may be the case that neither $f(n) = O(g(n))$ nor $f(n) = \Omega(g(n))$" (p. 52).  The example provided (on the same page) is of $n$ and $n^{1+\sin n}$.
+
+# Analytical inequalities
+
+The textbook provides some inqualities that suggest how exponents, linear terms, logarithms, and factorials grow compared to each other.  Since this information is already available in other forms elsewhere, a small selection is reproduced below.
+
+## Exponents
+
+For real $x$:
+$$ e^x \ge 1 + x, $$
+
+where equality holds when $x = 0$.
+
+For $|x|\le 1$:
+$$ 1 + x \le e^x \le 1 + x + x^2.$$
+
+In fact, for x close enough to zero, we can approximate:
+$$e^x = 1 + x + \Theta(x^2).$$
+
+## Logarithms
+
+For $x > -1$:
+$$ \frac{x}{1+x} \le \ln(1+x) \le x.$$
+
+Also for any constant $a > 0$:
+$$\log^b n = o(n^a).$$
+
+## Factorial
+
+Stirling's approximation:
+$$ n! = \sqrt{2\pi n}\left(\frac{n}{e}\right)^n\left(1 + \Theta(\frac{1}{n})\right).$$
+
+Also, for $n \ge 1$:
+$$ n! = \sqrt{2\pi n}\left(\frac{n}{e}\right)^n e^{\alpha_n}, $$
+
+where 
+$$ \frac{1}{12 n + 1} < \alpha_n< \frac{1}{12 n} .$$
+
+Also,
+$$\begin{aligned}
+n! = o(n^n) \\
+n! = \omega(2^n) \\
+lg(n!) = \Theta(n \;\text{lg}\, n)
+\end{aligned}$$
