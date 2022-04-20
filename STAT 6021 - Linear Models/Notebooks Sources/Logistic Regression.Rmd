@@ -7,11 +7,8 @@ urlcolor: blue
 ---
 \newcommand \bs{{\boldsymbol\beta}}
 
-insMany of the formulas are primarily derived from _Linear Regression Analysis, Fifth Edition_ by Montgomery et al. and/or the materials from the STAT 6021 course taught by Dr. Woo at the University of Virginia.  It is believed that the materials are well-known equations and concepts in the public domain.  If you believe otherwise, please reach out to me through my Github account so that I can correct the material.  If not otherwise stated, quotes are from the textbook.
+Many of the formulas are primarily derived from _Linear Regression Analysis, Fifth Edition_ by Montgomery et al. and/or the materials from the STAT 6021 course taught by Dr. Woo at the University of Virginia.  It is believed that the materials are well-known equations and concepts in the public domain.  If you believe otherwise, please reach out to me through my Github account so that I can correct the material.  If not otherwise stated, quotes are from the textbook.
 
-\fbox{Warning!}
-
-This is a work in progress.  It is still being corrected and revised.  Please consult the textbook to verify formulas and propositions in this text.  If you find an error, let me know.
 
 # Introduction
 
