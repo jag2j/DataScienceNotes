@@ -37,17 +37,17 @@ This model does not work well for cases when the response varies between two val
 
 * The *odds of an event* is the probability of it happening divided by the probability of it not happening.  For example, if you have a 30% chance of winning at Blackjack, then your odds are
 
-$$ \frac{30}{100} = \frac{3}{10} = 0.3 $$
+$$ \frac{30}{70} = \frac{3}{7} = 0.42\dots $$
 
 * The *log-odds* of an event are the (natural) logarithm of the odds of the event:
 
-$$ \text{log-odds} = \ln(\text{odds}) $$
+$$ \text{`log-odds'} = \ln(\text{odds}) $$
 
-* A Bernoulli random variable represents an event that has two possible outcomes (occurring or not), with a fixed probability $\pi$.  The typical example is flipping a coin to see if you get heads.  Another example is the event of drawing a king of hearts after reshuffling a deck.
+* A Bernoulli random variable represents an event that has two possible outcomes (occurring or not), with a fixed probability $\pi$ for the `positive' outcome.  The typical example is flipping a coin to see if you get heads.  Another example is the event of drawing a king of hearts after reshuffling a deck.
 
 * The *logistic* and *logit* transforms respectively are 
 
-$$ \text{logistic}(x) = \frac{x}{1+x} \qquad \text{logit}(x) = \frac{x}{1-x}, $$
+$$ \text{logistic}(x) = \frac{x}{1+x} \qquad \text{logit}(x) = \frac{x}{1-x}\;, $$
 where the two are inverses:
 $$ \text{logistic}(\text{logit}(x)) = x.$$
 
@@ -62,7 +62,7 @@ $$ y = \begin{dcases}
 \end{dcases} $$
 
 ------------------          ------------------------------
-\fbox{ Note by JG }         The response values effectively represent our model for the random outcome of a trial for the observation group $i$, tied to specific $x$ values for that observation.  An observation point $i$ in the data can in fact cover multiple trial data points, in which case we use the confusing notation $y_i$ to refer to sum of outcomes (1 or 0) over all the trials.  We use $n_i$ to refer to the number of trials for observation $i$.  Then $y$ is the random variable predicting the outcome of a trial, rather than a specific data point.
+\fbox{ Note by JG }         The response values effectively represent our model for the random outcome of a trial for the observation group $i$, tied to specific $x$ values for that observation.  An observation point $i$ in the data can in fact cover multiple trial data points, in which case we use the confusing notation $y_i$ to refer to sum of `positive' outcomes over all the trials.  We use $n_i$ to refer to the number of trials for observation $i$.  Then $y$ is the random variable predicting the outcome of this accumulated trial, rather than a specific data point.
 
 ------------------          ------------------------------
 
@@ -80,7 +80,7 @@ $$
 which we can call the *linear predictor* (for the log-odds) given the specific predictor level.  
 
 ------------------                ------------------------------
-\fbox{ Notation of subscripts }   Since we are interested in the odds calculated for specific levels of $\textbf x$ here, I have added a subscript indicating the relationship to $\textbf x$. Outside of this section, I will sometimes drop the subscript for notational convenience.  The book uses $i$ as a subscript to indicate the result for the $\textbf x$ level derived from observation $i$.  I will also do this if we're specifically interested in an estimate tied to the $\textbf x_i$ for a particular observation.
+\fbox{ Notation of subscripts }   Since we are interested in the odds calculated for specific levels of $\textbf x$ here, I have added a subscript to $\eta_x$ indicating the relationship to $\textbf x$. Outside of this section, I will sometimes drop the subscript for notational convenience.  The book uses $i$ as a subscript to indicate the result for the $\textbf x$ level derived from observation $i$.  I will also do this if we're specifically interested in an estimate tied to the $\textbf x_i$ for a particular observation.
 
 ------------------                ------------------------------
 
@@ -98,7 +98,7 @@ where $\hat y$ here is a fitted value that we use as our estimate of the average
 
 We use the maximum-likelihood estimates to calculate values for the $\hat\bs$.  These are typically obtained using numerical methods (e.g., with a computer).  The book suggests using iteratively reweighted least squares.
 
-For interest, the likelhood function is
+For interest, the likelihood function is
 $$ L(\bs | \textbf y) = \prod_{i=1}^n \pi^{y_i}(1-\pi_i)^{n_i-y_i}.$$
 
 In some places, the book assumes that $n_i = 1$ and in others it does not.
@@ -218,7 +218,7 @@ $$\eta_{\text{reduced}} = \textbf X_1 \bs_1.$$
 We consider the deviance (also called the partial deviance)
 $$ D(\bs_2 | \bs_1) = D(\bs_1) - D(\bs). $$
 
-If the null hypothesis holds and for large $n$, this follow a $chi^2$ distribution with $r$ degrees of freedom, where $r$ is the number of coefficients we removed to make the reduced model.  
+If the null hypothesis holds and for large $n$, this follow a $\chi^2$ distribution with $r$ degrees of freedom, where $r$ is the number of coefficients we removed to make the reduced model.  
 
 If $D(\bs_2 | \bs_1) \ge \chi^2_{a,r}$, we reject the null hypothesis.  Otherwise, we do not reject the null hypothesis.
 
