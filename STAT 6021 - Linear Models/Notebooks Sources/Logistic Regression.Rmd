@@ -47,7 +47,7 @@ $$ \text{`log-odds'} = \ln(\text{odds}) $$
 
 * The *logistic* and *logit* transforms respectively are 
 
-$$ \text{logistic}(x) = \frac{x}{1+x} \qquad \text{logit}(x) = \frac{x}{1-x}\;, $$
+$$ \text{logistic}(x) = \frac{e^x}{e^x + 1} \qquad \text{logit}(x) = \ln\left(\frac{x}{1-x}\right)\;, $$
 where the two are inverses:
 $$ \text{logistic}(\text{logit}(x)) = x.$$
 
